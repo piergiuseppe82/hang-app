@@ -18,11 +18,8 @@ public class PostsController {
 	
 		@RequestMapping(value = "/posts")
 	    public @ResponseBody List<PostPojo> posts(HttpSession session) {
-			List<PostPojo> ret =  postServices.getPosts(null, null, null);
-			
-			return ret;
-	    	
-	    	
+			List<PostPojo> ret =  postServices.getPosts(null, null, null);			
+			return ret;	    	
 	    }
 	    
 
