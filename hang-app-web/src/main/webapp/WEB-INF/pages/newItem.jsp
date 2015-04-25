@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
 <jsp:include page="commons/header.jsp"/>
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIigdnVVv3dnvj3efhpYWALSGdstEHbuU">
-   </script>
+	
   <script type="text/javascript">
       function initialize() {
     	  

@@ -18,7 +18,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
       <script type="text/javascript" src="js/hangwebapputils.js"></script>
-   
+   	  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIigdnVVv3dnvj3efhpYWALSGdstEHbuU"></script>
   <nav>
     <div class="nav-wrapper teal lighten-2">
       <a href="#!" class="brand-logo">Hang App</a>
