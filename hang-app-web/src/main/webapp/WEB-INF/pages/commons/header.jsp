@@ -1,4 +1,4 @@
-<%@page import="it.piergiuseppe82.hangapp.services.repositories.model.Person"%>
+<%@page import="it.piergiuseppe82.hangapp.services.bean.pojo.PersonPojo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
       <ul class="right hide-on-med-and-down">
       	<li><a href="./">Home</a></li>      
       	<%if(request.getSession().getAttribute("user") != null){ %>
-      		<li><a href="profile"><%=((Person)request.getSession().getAttribute("user")).getAccountId()%></a></li> 
+      		<li><a href="profile"><%=((PersonPojo)request.getSession().getAttribute("user")).getAccountId()%></a></li> 
 	       	<li><a href="logout">Log Out</a></li>      
 	    <%}else{ %>
 	       	<li><a href="logon">Log On</a></li>     
@@ -36,7 +36,7 @@
       <ul class="side-nav" id="mobile-demo">
       	<li><a href="./">Home</a></li>  
         <%if(request.getSession().getAttribute("user") != null){ %>
-	       	<li><a href="profile"><%=((Person)request.getSession().getAttribute("user")).getAccountId()%></a></li> 
+	       	<li><a href="profile"><%=((PersonPojo)request.getSession().getAttribute("user")).getAccountId()%></a></li> 
 	       	<li><a href="logout">Log Out</a></li>      
 	    <%}else{ %>
 	       	<li><a href="logon">Log On</a></li>      

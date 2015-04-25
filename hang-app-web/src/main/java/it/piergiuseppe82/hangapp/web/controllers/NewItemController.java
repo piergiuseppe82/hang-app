@@ -1,7 +1,7 @@
 package it.piergiuseppe82.hangapp.web.controllers;
 
 import it.piergiuseppe82.hangapp.services.bean.PostServices;
-import it.piergiuseppe82.hangapp.services.repositories.model.Person;
+import it.piergiuseppe82.hangapp.services.bean.pojo.PersonPojo;
 
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class NewItemController {
     		return "logon";
     	}  
     	try {
-			postServices.addPost(((Person)session.getAttribute("user")).getAccountId(), title, latitude, longitude, imageFile.getBytes());
+			postServices.addPost(((PersonPojo)session.getAttribute("user")).getAccountId(), title, latitude, longitude, imageFile.getBytes());
 			return "welcome";
 		} catch (Throwable e) {
 			e.printStackTrace();

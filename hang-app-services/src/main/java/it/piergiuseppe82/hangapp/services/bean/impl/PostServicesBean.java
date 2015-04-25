@@ -2,12 +2,13 @@ package it.piergiuseppe82.hangapp.services.bean.impl;
 
 import it.piergiuseppe82.hangapp.services.bean.MediaServices;
 import it.piergiuseppe82.hangapp.services.bean.PostServices;
+import it.piergiuseppe82.hangapp.services.bean.pojo.PostPojo;
+import it.piergiuseppe82.hangapp.services.bean.utils.Assembler;
 import it.piergiuseppe82.hangapp.services.repositories.PersonRepository;
 import it.piergiuseppe82.hangapp.services.repositories.PostRepository;
 import it.piergiuseppe82.hangapp.services.repositories.model.Person;
 import it.piergiuseppe82.hangapp.services.repositories.model.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -57,13 +58,13 @@ public class PostServicesBean implements PostServices{
 	}
 
 	@Override
-	public List<Post> getPosts(String accountId, String latitude,
+	public List<PostPojo> getPosts(String accountId, String latitude,
 			String longitude) {
-		List<Post> retList = null;
+		List<PostPojo> retList = null;
 		Transaction tx = graphDatabase.beginTx();
 		try{
 			Iterable<Post> findAll = postRepository.findAll();
-			retList = toList(findAll);
+			retList = Assembler.toPojoList(findAll);
 			tx.success();
 		}catch(Throwable t){
 			log.error("Error during register",t);			
@@ -74,14 +75,6 @@ public class PostServicesBean implements PostServices{
 		return retList;
 	}
 
-	private List<Post> toList(Iterable<Post> findAll) {
-		if(findAll == null) return null;
-		List<Post> list = new ArrayList<Post>();
-		for (Post post : findAll) {
-			list.add(post);
-		}
- 		return list;
-	}
 	
 	
 
