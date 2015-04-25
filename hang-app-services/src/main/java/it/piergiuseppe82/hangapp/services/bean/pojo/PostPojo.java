@@ -1,4 +1,4 @@
-package it.piergiuseppe82.hangapp.web.rest.pojo;
+package it.piergiuseppe82.hangapp.services.bean.pojo;
 
 public class PostPojo {
 		

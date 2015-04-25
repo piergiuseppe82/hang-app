@@ -1,9 +1,9 @@
 package it.piergiuseppe82.hangapp.web.controllers.rest;
 
 import it.piergiuseppe82.hangapp.services.bean.PostServices;
+import it.piergiuseppe82.hangapp.services.bean.pojo.PostPojo;
+import it.piergiuseppe82.hangapp.services.bean.utils.Assembler;
 import it.piergiuseppe82.hangapp.services.repositories.model.Post;
-import it.piergiuseppe82.hangapp.web.rest.pojo.PostPojo;
-import it.piergiuseppe82.hangapp.web.utils.Assembler;
 
 import java.util.ArrayList;
 import java.util.List;

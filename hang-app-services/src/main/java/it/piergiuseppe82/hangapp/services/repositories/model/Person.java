@@ -17,7 +17,12 @@ public class Person {
 
 
 	@GraphId Long id;
-    private String fullName;
+    public Long getId() {
+		return id;
+	}
+
+
+	private String fullName;
     
 
     @Indexed(unique=true, failOnDuplicate=true)

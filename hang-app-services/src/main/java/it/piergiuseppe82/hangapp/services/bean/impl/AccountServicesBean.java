@@ -1,8 +1,11 @@
 package it.piergiuseppe82.hangapp.services.bean.impl;
 
 import it.piergiuseppe82.hangapp.services.bean.AccountServices;
+import it.piergiuseppe82.hangapp.services.bean.pojo.PersonPojo;
+import it.piergiuseppe82.hangapp.services.bean.utils.Assembler;
 import it.piergiuseppe82.hangapp.services.repositories.PersonRepository;
 import it.piergiuseppe82.hangapp.services.repositories.model.Person;
+import it.piergiuseppe82.hangapp.services.supports.Utility;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,12 +23,20 @@ public class AccountServicesBean implements AccountServices {
 	@Autowired GraphDatabase graphDatabase;
 	
 	@Override
-	public int registerPerson(Person person) {
+	public int registerPerson(String fullName, String accountId, String password, String email) {
+		Person person = new Person();
+		
+		person.setAccountCreationTime(System.currentTimeMillis());
+		person.setAccountId(accountId);
+		person.setEmail(email);
+		
+		
 		int ret = 0;
 		log.debug("Start Register - "+person);
 		
 		Transaction tx = graphDatabase.beginTx();
 		try{
+			person.setPassword(Utility.passwordEncode(password));
 			personRepository.save(person);
 			tx.success();
 			
@@ -45,12 +56,15 @@ public class AccountServicesBean implements AccountServices {
 	}
 
 	@Override
-	public Person checkPerson(String username, String password) {
+	public PersonPojo checkPerson(String username, String password) {
 		Person person = personRepository.findByAccountId(username);
+		password = Utility.passwordEncode(password);
 		if(person != null){
 			String passwordRegistered = person.getPassword();
 			if(passwordRegistered.equalsIgnoreCase(password)){
-				return person;
+				PersonPojo to = new PersonPojo();
+				Assembler.toPojo(person,to);
+				return to;
 			}
 		}
 		return null;

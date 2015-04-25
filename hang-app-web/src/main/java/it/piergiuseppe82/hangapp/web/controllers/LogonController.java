@@ -1,10 +1,8 @@
 package it.piergiuseppe82.hangapp.web.controllers;
 
 import it.piergiuseppe82.hangapp.services.bean.AccountServices;
-import it.piergiuseppe82.hangapp.services.repositories.model.Person;
+import it.piergiuseppe82.hangapp.services.bean.pojo.PersonPojo;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -39,12 +37,7 @@ public class LogonController {
     		model.addAttribute("toast", "Insert Username and Password");
     	
     	}else{
-    		try {
-				password =new String(MessageDigest.getInstance("MD5").digest(password.getBytes()));
-			} catch (NoSuchAlgorithmException e) {
-				model.addAttribute("toast", "Error during digest password.");
-				return "logon";
-			}
+    		
     		if(verifyAccount(username,password,session)){
     			
     			return "welcome";
@@ -57,7 +50,7 @@ public class LogonController {
     
     private boolean verifyAccount(String username, String password, HttpSession session) {
     	
-		Person user = accountServices.checkPerson(username, password);
+		PersonPojo user = accountServices.checkPerson(username, password);
 		if(user !=null){
 			session.setAttribute("user", user);
 			return true;
