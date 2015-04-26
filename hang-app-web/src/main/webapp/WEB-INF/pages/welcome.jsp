@@ -18,7 +18,7 @@
 	 item = item + "<div class='row'>";
 	 item = item + "	<div class='card'>";
 	 item = item + "		<div class='row valign-wrapper'>";
-	 item = item + "			<div class='col s2'>";
+	 item = item + "			<div class='col s2' style='margin:0.3rem'>";
 	 item = item + "				<img src='media/image/"+objJ["photoPath"]+"' alt=''";
 	 item = item + "					class='circle responsive-img'>";
 	 item = item + "				<!-- notice the 'circle' class -->";
@@ -32,7 +32,7 @@
 	 item = item + "		</div>";
 	 
 	 item = item + "		<div class='col s12 card-action'>";
-	 item = item + "              <p style='color:silver'>"+(new Date(objJ["postCreationTime"])).toLocaleString()+"</p>";
+	 item = item + "              <p style='color:silver'>"+getFormattedDHMS(getDHMSDifferenceBetween(objJ["postCreationTime"]))+"</p>";
 	 item = item + "              <p id='position_post_"+objJ["id"]+"' style='color:silver'></p>";	 
 	 item = item + "         </div>";
 	 item = item + "	</div>";

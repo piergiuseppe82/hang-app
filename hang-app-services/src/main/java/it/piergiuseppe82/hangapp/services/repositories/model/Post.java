@@ -1,10 +1,13 @@
 package it.piergiuseppe82.hangapp.services.repositories.model;
 
 import org.neo4j.graphdb.Direction;
+import org.springframework.data.geo.Point;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.support.index.IndexType;
 
 @NodeEntity
 public class Post {
@@ -16,6 +19,7 @@ public class Post {
     private String longitude;
     private Long postCreationTime;
     
+    @Indexed(indexType = IndexType.POINT, indexName = "PostLocation") Point wkt;
    
 	public Long getPostCreationTime() {
 		return postCreationTime;
@@ -43,6 +47,7 @@ public class Post {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.postCreationTime = System.currentTimeMillis();
+		this.wkt = new Point(new Float(latitude), new Float(longitude));
 	}
 	
 	public String getPostName() {
@@ -94,5 +99,8 @@ public class Post {
 		return ret;
 	}
 
+	public void setPostLocation(Point point){
+		this.wkt = point;
+	}
 	
 }

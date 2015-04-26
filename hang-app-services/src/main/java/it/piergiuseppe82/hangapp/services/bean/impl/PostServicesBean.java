@@ -9,12 +9,17 @@ import it.piergiuseppe82.hangapp.services.repositories.PostRepository;
 import it.piergiuseppe82.hangapp.services.repositories.model.Person;
 import it.piergiuseppe82.hangapp.services.repositories.model.Post;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.neo4j.graphdb.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Circle;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.data.neo4j.core.GraphDatabase;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +70,25 @@ public class PostServicesBean implements PostServices{
 		try{
 			Iterable<Post> findAll = postRepository.getAllPostpaginate(0, 10);
 			retList = Assembler.toPojoList(findAll);
+			tx.success();
+		}catch(Throwable t){
+			log.error("Error during register",t);			
+			tx.failure();
+		}finally{		
+			tx.close();
+		}
+		return retList;
+	}
+
+	@Override
+	public List<PostPojo> getPostsNearly(String accountId, String latitude,
+			String longitude) {
+		List<PostPojo> retList = null;
+		Transaction tx = graphDatabase.beginTx();
+		try{
+			Iterable<Post> findAll = postRepository.findWithinDistance("PostLocation", new Circle( new Point(new Float(latitude), new Float(longitude)), new Distance(3, Metrics.KILOMETERS)));
+			retList = Assembler.toPojoList(findAll);
+			if(retList != null)Collections.sort(retList);
 			tx.success();
 		}catch(Throwable t){
 			log.error("Error during register",t);			

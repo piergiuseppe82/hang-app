@@ -1,5 +1,6 @@
 package it.piergiuseppe82.hangapp.services.supports;
 
+import java.io.File;
 import java.security.MessageDigest;
 
 import org.apache.commons.logging.Log;
@@ -13,7 +14,7 @@ public class Utility {
 		if(System.getenv("OPENSHIFT_DATA_DIR") != null)
 			return System.getenv("OPENSHIFT_DATA_DIR");
 		else
-			return "/home/placava/devel/servers/neo4jHang/data/";
+			return System.getProperty("user.home")+File.separator;
 	}
 	
 	

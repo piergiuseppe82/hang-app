@@ -1,6 +1,6 @@
 package it.piergiuseppe82.hangapp.services.bean.pojo;
 
-public class PostPojo {
+public class PostPojo implements Comparable<PostPojo>{
 		
 		private Long id;		
 		private String accountId;
@@ -51,5 +51,19 @@ public class PostPojo {
 		}
 		public void setPostCreationTime(Long postCreationTime) {
 			this.postCreationTime = postCreationTime;
+		}
+		@Override
+		public String toString() {
+			return "PostPojo [id=" + id + ", accountId=" + accountId
+					+ ", postName=" + postName + ", photoPath=" + photoPath
+					+ ", latitude=" + latitude + ", longitude=" + longitude
+					+ ", postCreationTime=" + postCreationTime + "]";
+		}
+		@Override
+		public int compareTo(PostPojo o) {
+			if(o == null || o.postCreationTime == null) return -1;
+			if(o.postCreationTime.equals(this.postCreationTime)) return 0;
+			if(o.postCreationTime < this.postCreationTime) return -1;
+ 			return 1;
 		}
 }
