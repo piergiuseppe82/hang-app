@@ -63,7 +63,7 @@ public class PostServicesBean implements PostServices{
 		List<PostPojo> retList = null;
 		Transaction tx = graphDatabase.beginTx();
 		try{
-			Iterable<Post> findAll = postRepository.findAll();
+			Iterable<Post> findAll = postRepository.getAllPostpaginate(0, 10);
 			retList = Assembler.toPojoList(findAll);
 			tx.success();
 		}catch(Throwable t){
